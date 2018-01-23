@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+AmericanArchivist/*
+AmericanArchivist.csv
+
 # Distribution / packaging
 .Python
 env/
