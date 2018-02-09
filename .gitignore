@@ -8,6 +8,8 @@ __pycache__/
 
 AmericanArchivist/*
 AmericanArchivist.csv
+test/*
+text/*
 
 # Distribution / packaging
 .Python
