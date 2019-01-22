@@ -40,14 +40,17 @@ else:
 	else:
 		method = "year"
 	
+	totalCount = 0
 	xAxis = []
 	for root, dirs, files in os.walk(textDir):
 		if method.lower() == "issue" or method.lower() == "issues":
 			if args.range:
 				r1, r2 = args.range.split("-")
+				methodCount = 0
 				for file in files:
 					fileYear = int(file.split("_")[0])
 					if fileYear >= int(r1) and fileYear <= int(r2):
+						methodCount += 1
 						xAxis.append(file)
 			else:
 				xAxis = files
@@ -57,7 +60,9 @@ else:
 			else:
 				r1 = 1900
 				r2 = 2200
-			for x in range(int(r1), int(r2)):
+			methodCount = 0
+			for x in range(int(r1), int(r2) + 1):
+				methodCount += 1
 				yearGroup = []
 				for file in files:
 					if file.startswith(str(x)):
@@ -109,7 +114,9 @@ else:
 							yLabel = "Instances"
 						#print (phrase + ": " + str(matchCount))
 					xLists[phrase].append(matchCount)
+					totalCount = totalCount + matchCount
 	
+	print (str(totalCount) + " total instances of " + ", ".join(args.n) + " , or " + str(totalCount/methodCount) + " per " + method + ".")
 	#print (xLists)
 	for key, line in xLists.items():
 		plt.plot(yList, line, label=key.title().replace("|", " or "))			
